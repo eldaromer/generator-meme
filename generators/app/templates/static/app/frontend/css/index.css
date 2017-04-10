@@ -1,0 +1,13 @@
+.centered {
+    text-align: center;
+    margin: 0 auto;
+}
+.centered-vertical-child {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.centered-horizontal-child {
+    position: relative;
+    transform: translateX(50%);
+}

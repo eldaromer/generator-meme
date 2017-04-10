@@ -1,0 +1,19 @@
+{
+  "name": "generator-meme",
+  "version": "1.0.0",
+  "description": "App meant to streamline MEAN development using the MEME organization system. Check README.MD for more info.",
+  "files": [
+    "generators"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "gulp": "^3.9.1",
+    "gulp-inject": "^4.2.0",
+    "mkdirp": "^0.5.1",
+    "request": "^2.81.0",
+    "yeoman-generator": "^1.1.0"
+  }
+}

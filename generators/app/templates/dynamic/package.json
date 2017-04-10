@@ -1,0 +1,26 @@
+{
+  "name": "<%= appName %>",
+  "version": "1.0.0",
+  "description": "<%= description %>",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app/index.js"
+  },
+  "author": "<%= appName %>",
+  "dependencies": {
+    "async": "^2.1.2",
+    "bcrypt": "^0.8.7",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "extend": "^3.0.0",
+    "jsonwebtoken": "^7.1.9",
+    "mongoose": "^4.6.5",
+    "morgan": "^1.7.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-inject": "^4.1.0",
+    "gulp-nodemon": "^2.2.1",
+    "wiredep": "^4.0.0"
+  }
+}
