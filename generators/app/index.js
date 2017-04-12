@@ -23,7 +23,7 @@ module.exports = class extends Generator {
     //I don't know what to put in this function lmao
     initializing () {
         this.log("Welcome to the meme generator.....");
-        this.log("Generating Modular E MEAN Environment");
+        this.log("Generating Modular Enterprisable MEAN Environment");
         this.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         this.log("");
         this.log("");
