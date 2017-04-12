@@ -7,12 +7,30 @@ var that;
 
 module.exports = class extends Generator {
 
+    initializing () {
+        if (!fs.existsSync('.yo-rc.json')) {
+            throw new Error('Please run the main generator before attempting to run the component generator!');
+        }
+    }
+
     //Prompts user for input
     prompting () {
         return this.prompt([{
             type: 'input',
             name: 'compName',
-            message: 'What would you like to name this component?'
+            message: 'What would you like to name this component?',
+            validate: function (input) {
+                var done = this.async();
+
+                setTimeout(function() {
+                    var reg = /^[a-zA-Z]+$/;
+                    if (!reg.test(input)) {
+                        done('Component names must be one words using only english letters.');
+                    }
+
+                    done(null, true);
+                }, 100);
+            }
         }, {
             type: 'confirm',
             name: 'angConf',
@@ -24,6 +42,9 @@ module.exports = class extends Generator {
             message: 'Does this component have a backend use?',
             default: true
         }, {
+            when: function (response) {
+                return response.angConf;
+            },
             type: 'confirm',
             name: 'routeConf',
             message: 'Would you like to add the generic route?',
@@ -56,7 +77,7 @@ module.exports = class extends Generator {
         //Resets components
         this.config.set("components", that.settings.components);
         this.config.set("backComponents", that.settings.backComponents);
-        this.log(that.settings);
+        //this.log(that.settings);
     }
 
     //Adds folders in frontend and backend if needed
@@ -150,16 +171,15 @@ module.exports = class extends Generator {
 
     }
 
+    install () {
+        this.spawnCommand('gulp', ['inject'])
+            .on('close', function () {
+                this.log("");
+            });
+    }
+
     //Closing statements
     end () {
-        this.log("");
-        this.log("Please take the following actions or your application will NOT work.");
-        this.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        this.log("");
-        this.log("");
-        this.log("Update the 'app/backend/index.js' file to include your new component");
-        this.log("");
-        this.log("Update the 'app/frontend/js/config.js' file to include the url path to your new component")
     }
 
 };

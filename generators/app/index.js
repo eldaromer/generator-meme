@@ -41,7 +41,22 @@ module.exports = class extends Generator {
         return this.prompt([{
             type: 'input',
             name: 'appName',
-            message: 'What is the name of your app?'
+            message: 'What is the name of your app?',
+            required: true,
+            default: this.appname,
+            validate: function (input) {
+                var done = this.async();
+
+                setTimeout(function() {
+                    var reg = /^[a-zA-Z ]+$/;
+                    if (!reg.test(input)) {
+                        done('Name can only contain english letters and spaces.');
+                    } else if (input.replace(/ +/g, '').length < 2) {
+                        done('Name must be at least 2 letters long');
+                    }
+                    done(null, true);
+                }, 100);
+            }
         }, {
             type: 'input',
             name: 'description',
@@ -184,6 +199,25 @@ module.exports = class extends Generator {
                                 console.log("");
                                 console.log("Finished injecting Files.");
                                 console.log("");
+                                this.log("");
+
+                                this.log("");
+                                this.log("I'm wrapping up now!");
+                                this.log("Please perform these recommended actions as well");
+                                this.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                                this.log("");
+                                this.log("");
+                                this.log("Run 'yo meme:component' to create a component with the name 'name'");
+                                this.log("");
+                                this.log("Don't forget to add the following to the 'app/frontend/bower_components/bootstrap/bower.json' file");
+                                this.log("");
+                                this.log("\"main\": [");
+                                this.log("\t\"dist/css/bootstrap.css\",");
+                                this.log("\t\"dist/js/bootstrap.js\"");
+                                this.log("]");
+                                this.log("");
+                                this.log("");
+                                this.log("Run 'gulp inject' whenever you add a new file amd run 'gulp start' to create an automatically updating server.");
                             });
                     });
             });
@@ -228,27 +262,7 @@ module.exports = class extends Generator {
 
     //Closes Up
     end () {
-        this.log("");
-        this.log("Injecting files to appropriate locations.....");
-        this.log("");
 
-        this.log("");
-        this.log("I'm wrapping up now!");
-        this.log("Please perform these recommended actions as well");
-        this.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        this.log("");
-        this.log("");
-        this.log("Run 'yo meme:name' to create a component with the name 'name'");
-        this.log("");
-        this.log("Don't forget to add the following to the 'app/frontend/bower_components/bootstrap/bower.json' file");
-        this.log("");
-        this.log("\"main\": [");
-        this.log("\t\"dist/css/bootstrap.css\",");
-        this.log("\t\"dist/js/bootstrap.js\"");
-        this.log("]");
-        this.log("");
-        this.log("");
-        this.log("Run 'gulp inject' whenever you add a new file amd run 'gulp start' to create an automatically updating server.");
     }
 
 };
