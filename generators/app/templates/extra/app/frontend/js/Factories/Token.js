@@ -3,7 +3,7 @@ angular.module('app')
     .factory('Token', ['$cookies', function ($cookies) {
         var Token = {};
 
-        Token._tokenCookie = 'litDashboardToken';
+        Token._tokenCookie = '<%= acronym %>Token';
 
         Token.getToken = function () {
             return $cookies.get(Token._tokenCookie);

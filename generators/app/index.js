@@ -7,6 +7,9 @@ var inject = require('gulp-inject');
 //Variable to hold specific this for async acronym request
 var gen;
 
+//Variable to hold specific this for file writing
+var writer;
+
 //Variable to hold specific this for installation
 var installer;
 
@@ -147,6 +150,8 @@ module.exports = class extends Generator {
         this.log("Writing Static Files.....");
         this.log("");
 
+        writer = this;
+
         //Copy static files
         this.fs.copy(
             this.templatePath('static/**/*'),
@@ -255,6 +260,17 @@ module.exports = class extends Generator {
         }
 
         fin = fin.replace(/\s/g, '');
+
+        writer.fs.copyTpl(
+            this.templatePath('extra/**/*'),
+            this.destinationRoot(),
+            {
+                appName: this.answers.appName,
+                description: this.answers.description,
+                authorName: this.answers.authorName,
+                acronym: fin.toLowerCase()
+            }
+        );
 
         gen.config.set('acronym', fin.toLowerCase());
         gen.config.save();
