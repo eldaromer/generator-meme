@@ -143,7 +143,7 @@ module.exports = class extends Generator {
             newData = [newData.slice(0, start), newData.slice(end)].join('');
             insert = "";
             for (var i = 0; i < that.settings.backComponents.length; i++) {
-                insert+= "\n\trouter.use('/" + that.settings.backComponents[i] + "', require('./" + that.settings.backComponents[i] + "/" + that.settings.backComponents[i] + ".routes.js')(app))";
+                insert+= "\n\trouter.use('/" + that.settings.backComponents[i].toLowerCase() + "', require('./" + that.settings.backComponents[i] + "/" + that.settings.backComponents[i] + ".routes.js')(app))";
             }
             newData = [newData.slice(0, start), insert + "\n", "\t" + newData.slice(start)].join('');
             fs.writeFileSync('app/backend/index.js', newData, 'utf-8');
