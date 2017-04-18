@@ -265,9 +265,9 @@ module.exports = class extends Generator {
             writer.templatePath('extra/**/*'),
             writer.destinationRoot(),
             {
-                appName: this.answers.appName,
-                description: this.answers.description,
-                authorName: this.answers.authorName,
+                appName: writer.answers.appName,
+                description: writer.answers.description,
+                authorName: writer.answers.authorName,
                 acronym: fin.toLowerCase()
             }
         );
