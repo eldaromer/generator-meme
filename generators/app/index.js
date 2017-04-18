@@ -262,8 +262,8 @@ module.exports = class extends Generator {
         fin = fin.replace(/\s/g, '');
 
         writer.fs.copyTpl(
-            this.templatePath('extra/**/*'),
-            this.destinationRoot(),
+            writer.templatePath('extra/**/*'),
+            writer.destinationRoot(),
             {
                 appName: this.answers.appName,
                 description: this.answers.description,
