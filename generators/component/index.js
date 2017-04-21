@@ -65,12 +65,12 @@ module.exports = class extends Generator {
         that.settings = this.config.getAll();
         //Adds component to auto-generated list if it isn't already there
         if (this.answers.routeConf && this.answers.angConf) {
-            if(!that.settings.components.includes(this.answers.compName)) {
+            if(that.settings.components.indexOf(this.answers.compName) == -1) {
                 that.settings.components.push(this.answers.compName);
             }
         }
         if (this.answers.backConf) {
-            if(!that.settings.backComponents.includes(this.answers.compName)) {
+            if(that.settings.backComponents.indexOf(this.answers.compName) == -1) {
                 that.settings.backComponents.push(this.answers.compName);
             }
         }
@@ -160,9 +160,9 @@ module.exports = class extends Generator {
             newData = [newData.slice(0, start), newData.slice(end)].join('');
             var insert = "";
             for (var i = 0; i < that.settings.components.length; i++) {
-                insert+="\n\t\t\t.when('/" + that.settings.components[i] + "', {\n" +
+                insert+="\n\t\t\t.when('/" + that.settings.components[i].toLowerCase() + "', {\n" +
                         "\t\t\t\tname: '" + that.settings.components[i] + "',\n" +
-                        "\t\t\t\ttemplate: '<" + that.settings.acronym + "-" + that.settings.components[i].toLowerCase() + ">'\n" +
+                        "\t\t\t\ttemplate: '<" + that.settings.acronym + "-" + that.settings.components[i].toLowerCase() + "></" + that.settings.acronym + "-" + that.settings.components[i].toLowerCase() + ">'\n" +
                         "\t\t\t})";
             }
             newData = [newData.slice(0, start), insert + "\n", "\t\t" + newData.slice(start)].join('');
@@ -174,7 +174,7 @@ module.exports = class extends Generator {
     install () {
         this.spawnCommand('gulp', ['inject'])
             .on('close', function () {
-                this.log("");
+                that.log("");
             });
     }
 
