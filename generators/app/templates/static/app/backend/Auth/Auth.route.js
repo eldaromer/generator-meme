@@ -34,7 +34,7 @@ module.exports = function (app) {
                         return res.send(token);
                     });
                 } else {
-                    return res.sendStatus(403).send({message: 'The email and password you entered don\'t match our records.'})
+                    return res.status(403).send({message: 'The email and password you entered don\'t match our records.'})
                 }
             });
         });
